@@ -26,7 +26,7 @@ if(isset($_POST['submit-btn'])){
             $_SESSION['user_name']  = $row['name'];
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_id']    = $row['id'];
-            header('Location: index.php');
+            header('Location: ../02_User Site/home.php');
             exit;
         } 
         else {

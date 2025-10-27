@@ -98,7 +98,7 @@
       <div class="footer__bar">
         Copyright © 2025 কাচ্চিগঞ্জ. All Rights Reserved.
       </div>
-    </footer>S
+    </footer>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
