@@ -1,3 +1,16 @@
+<?php
+    include 'connection.php';
+    session_start();
+    $user_id=$_SESSION['user_id'];
+
+    if(!isset($user_id)){
+       header('location: ../01_Admin Site/login.php');
+    }
+    if(isset($_POST['logout'])){
+        session_destroy();
+        header('location: ../01_Admin Site/login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,36 +21,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>"> 
     <title>কাচ্চি গঞ্জ</title>
   </head>
   <body>
     <header class="header">
-      <nav>
-        <div class="nav__header">
-          <div class="nav__logo">
-            <a href="#">
-              <img
-                src="assets/logo-white.png"
-                alt="logo"
-                class="nav__logo-white"
-              />
-            </a>
-          </div>
-          <div class="nav__menu__btn" id="menu-btn">
-            <i class="ri-menu-line"></i>
-          </div>
-        </div>
-        <ul class="nav__links" id="nav-links">
-          <li><a href="home.php">HOME</a></li>
-          <li><a href="menu.php">MENU</a></li>
-          <li><a href="reservation.php">RESERVATION</a></li>
-          <li><a href="contact.php">CONTACT</a></li>
-          <li><a href="about.php">ABOUT</a></li>
-          <li><a href="checkout.php">CHECKOUT</a></li>
-          <li><a href="cart.php">CART</a></li>
-          
-        </ul>
-      </nav>
+      <?php include 'nav.php'; ?>
 
       <div class="section__container header__container" id="home">
         <div class="header__image">

@@ -54,4 +54,3 @@ function Reserveatable() {
   window.location.href = "reservation.php"; 
 }
 
-
