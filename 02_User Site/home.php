@@ -36,6 +36,9 @@
                   এক মায়াজালে বেঁধে ফেলবে চিরকাল!"</h2>
           <h1>খেল খতম<br /><span>কাচ্চি হজম</span></h1>
 
+
+          
+
           <div class="button-group">
           <button class="btn menu-btn" onclick="exploreMenu()">Explore Our Menu</button>
           </div>
@@ -50,8 +53,7 @@
         কাচ্চিগাওয়ে প্রতিটি পদই তৈরি হয় খাঁটি উপকরণ এবং পরিপূর্ণ ভালোবাসার সাথে।
         আমাদের বিশেষ ডিশগুলো আপনাকে এনে দেবে এক অসাধারণ রন্ধন অভিজ্ঞতা।
       </p>
-
-      
+ 
       <div class="dish-container">
          <?php
                $select_products = mysqli_query($conn,"SELECT * FROM `products` ORDER BY id DESC") or die('query failed');
@@ -80,13 +82,31 @@
          ?>
       </div>
       
-
+    
       <div class="button-group">
         <button class="btn menu-btn" onclick="Menu()">Menu</button>
         <!-- <button class="btn reserve-btn" onclick="Reserveatable()">Reserve a table</button> -->
       </div>
       </div>
     </section>
+
+    <!-- 🎥 video section -->
+
+<section class="section__container video__section" id="videos">
+<p class="section__description">
+   “কাচ্চি ছাড়া ভালোবাসা আর কি?
+  যেখানে প্রতিটি মণ কাচ্চির গন্ধ মিশে থাকে হৃদয়ের কোণে,
+  সেখানে রসনা যেন খুঁজে পায় তার আসল স্বাদ।
+  </p>
+  <div class="video__grid">    
+    <div class="video__card">
+      <video autoplay muted loop controls>
+        <source src="assets/vid-3.mp4" type="video/mp4" />
+        আপনার ব্রাউজার ভিডিও প্লে করতে অক্ষম।
+      </video>
+            </div>  
+  </div>
+</section>
 
       <!--   EVENT   -->
         <section class="section__container event__container" id="event">
