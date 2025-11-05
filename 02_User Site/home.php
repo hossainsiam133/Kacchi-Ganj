@@ -51,58 +51,39 @@
         আমাদের বিশেষ ডিশগুলো আপনাকে এনে দেবে এক অসাধারণ রন্ধন অভিজ্ঞতা।
       </p>
 
+      
       <div class="dish-container">
+         <?php
+               $select_products = mysqli_query($conn,"SELECT * FROM `products` ORDER BY id DESC") or die('query failed');
+               if(mysqli_num_rows($select_products)>0)
+                {
+                  while($fetch_products=mysqli_fetch_assoc($select_products))
+                    {
+        ?>
         <div class="dish-card">
           <div class="dish-img">
-            <img src="assets/dish1.png" alt="Veg Biryani" />
-            <span class="price">300/-</span>
+            <img src="../01_Admin Site/image/<?php echo $fetch_products['image'];?>" alt="<?php echo $fetch_products['id'];?>" />
+            <span class="price"><?php echo $fetch_products['price']."/-";?></span>
           </div>
-          <h3 class="dish-title">ভেজ বিরিয়ানি</h3>
+          <h3 class="dish-title"><?php echo $fetch_products['name'];?></h3>
           <p class="dish-desc">
-            সুগন্ধি সবজি এবং মশলা দিয়ে তৈরি লোভনীয় ভেজ বিরিয়ানি, যা শাকাহারীদের
-            জন্য এক অনন্য অভিজ্ঞতা।
+           <?php echo $fetch_products['product_details'];?>
           </p>
         </div>
-
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="assets/dish1.png" alt="Morog Korma" />
-            <span class="price">250/-</span>
-          </div>
-          <h3 class="dish-title">স্পেশাল মোরগ কোরমা</h3>
-          <p class="dish-desc">
-            নরম মুরগি, ক্রিমি সস এবং মশলার নিখুঁত সমন্বয়— একবারই খেলে অভ্যস্ত!
-          </p>
-        </div>
-
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="assets/dish1.png" alt="Chicken Biryani" />
-            <span class="price">280/-</span>
-          </div>
-          <h3 class="dish-title">চিকেন বিরিয়ানি</h3>
-          <p class="dish-desc">
-            সযত্নভাবে মশলা মিশিয়ে রান্না করা নরম মুরগি, যা প্রতিটি কামড়ে এনে দেয়
-            অসাধারণ স্বাদ।
-          </p>
-        </div>
-
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="assets/dish1.png" alt="Kacchi Biryani" />
-            <span class="price">240/-</span>
-          </div>
-          <h3 class="dish-title">কাচ্চি বিরিয়ানি</h3>
-          <p class="dish-desc">
-            সুগন্ধি বাসমতী চাল, নরম মাংস এবং বিশেষ মশলা দিয়ে তৈরি কাচ্চি বিরিয়ানি—
-            যা প্রতিটি বিরিয়ানি প্রেমীর প্রথম পছন্দ।
-          </p>
-        </div>
+         <?php
+           }
+              }
+              else
+                {
+                  echo '<p class="empty">no products added yet!</p>';
+              }
+         ?>
       </div>
+      
 
       <div class="button-group">
         <button class="btn menu-btn" onclick="Menu()">Menu</button>
-        <button class="btn reserve-btn" onclick="Reserveatable()">Reserve a table</button>
+        <!-- <button class="btn reserve-btn" onclick="Reserveatable()">Reserve a table</button> -->
       </div>
       </div>
     </section>

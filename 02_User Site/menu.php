@@ -30,7 +30,7 @@
 
       <div class="section__container header__container" id="home">
         <div class="header__image">
-          <img src="assets/menuheader2.png" alt="header" />
+          <img src="assets/menuheader.png" alt="header" />
         </div>
         <div class="header__content">
           <h2>"দুনিয়াতে 'কাচ্চি' 
