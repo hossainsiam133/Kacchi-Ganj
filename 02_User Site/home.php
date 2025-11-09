@@ -135,7 +135,6 @@
         কাচ্চিগাওয়ে প্রতিটি পদই তৈরি হয় খাঁটি উপকরণ এবং পরিপূর্ণ ভালোবাসার সাথে।
         আমাদের বিশেষ ডিশগুলো আপনাকে এনে দেবে এক অসাধারণ রন্ধন অভিজ্ঞতা।
       </p>
-<<<<<<< HEAD
       <?php
            if(isset($message12)){
              foreach ($message12 as $message12){
@@ -148,9 +147,6 @@
              }
            }
         ?>
-=======
- 
->>>>>>> main
       <div class="dish-container">
          <?php
                $select_products = mysqli_query($conn,"SELECT * FROM `products` ORDER BY id DESC") or die('query failed');
@@ -191,7 +187,8 @@
       
     
       <div class="button-group">
-        <button class="btn menu-btn" onclick="Menu()">Menu</button>
+        <a href="menu.php"><button class="btn menu-btn" >Menu</button></a> 
+        <!-- <button class="btn menu-btn" onclick="Menu()">Menu</button> -->
         <!-- <button class="btn reserve-btn" onclick="Reserveatable()">Reserve a table</button> -->
       </div>
       </div>
@@ -224,7 +221,7 @@
              
         <div class="event__details">
           <h2 class="section__header">আসন্ন ইভেন্ট</h2>
-          <p class="section__description">
+          <p class="section__description" style="text-align: justify;">
           আসছে জিভে জল আনা “বাদশাহী কাচ্চি”!
           একবার খেলেই মন বলবে — আরো একবার!
           💰 দাম মাত্র ১৮৫০ টাকা - রাজকীয় স্বাদ এখন সবার নাগালে!
@@ -254,7 +251,7 @@
   document.querySelectorAll('.message').forEach(msg => {
     msg.remove();
   });
-}, 3000);
+}, 2000);
 
     </script>
   </body>
