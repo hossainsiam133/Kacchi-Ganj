@@ -102,7 +102,7 @@ nav {
     <nav>
         <div class="nav__header">
           <div class="nav__logo">
-            <a href="#">
+            <a href="home.php">
               <img src="assets/logo-white.png" alt="logo" class="nav__logo-white"/>
             </a>
           </div>          
@@ -120,11 +120,9 @@ nav {
             $cart_num_rows = mysqli_num_rows($select_cart);
             ?>
             <a href="cart.php"><i class="bi bi-cart"></i><sup><?php echo $cart_num_rows; ?></sup></a>
-            <!-- ✅ keeping only ONE menu icon -->
             <i class="bi bi-list" id="menu-btn"></i>
             <i class="bi bi-person" id="user-btn"></i>
           </div>
-        <!-- ✅ User Box Section -->
         <div class="user-box">
           <?php if(isset($_SESSION['user_id'])): ?>
               <p><b>Username : </b><span><?php echo $_SESSION['user_name']; ?></span></p>
