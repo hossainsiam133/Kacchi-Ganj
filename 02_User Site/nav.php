@@ -112,7 +112,7 @@ nav {
           <li><a href="home.php">HOME</a></li>
           <li><a href="menu.php">MENU</a></li>
           <li><a href="about.php">ABOUT</a></li>
-          <li><a href="contact.php">CONTACT</a></li>
+          <li><a href="messages.php">CONTACT</a></li>
         </ul>
         <div class="icons">
             <?php 
