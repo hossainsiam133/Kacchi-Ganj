@@ -16,7 +16,7 @@
             <a href="admin_product.php">products</a>
             <a href="admin_order.php">orders</a>
             <a href="admin_user.php">user</a>
-            <a href="admin_message.php">message</a>
+            <a href="admin_messages.php">message</a>
         </nav>
         <div class="icons">
             <i class="bi bi-person" id="user-btn"></i>
