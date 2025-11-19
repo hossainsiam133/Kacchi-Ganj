@@ -41,24 +41,42 @@
         <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>"> 
          <style>
       .add-to-cart-form {
-    text-align: center;
-    margin-top: 10px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        margin-top: 0;
 }
 
 .add-cart-btn {
-    background: #d4af37;
-    color: #fff;
+        /* use !important to override any conflicting styles that may set the background to white */
+        /* background: linear-gradient(135deg, #d4af37 0%, #b68c25 100%) !important; */
+        background: white;
+        color: #530000 !important;
     border: none;
-    padding: 10px 14px;
-    border-radius: 50%;
+    padding: 12px 16px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 20px;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
 }
 
 .add-cart-btn:hover {
-    background: #b68c25;
-    transform: scale(1.1);
+    /* background: linear-gradient(135deg, #b68c25 0%, #9a7020 100%); */
+    background: #530000;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+}
+
+.add-cart-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 .message {
     position: fixed;
@@ -101,6 +119,21 @@
         transform: translateX(0);
     }
 }
+    
+    /* Section Subtitle Styling */
+    .section-subtitle {
+        font-size: 18px;
+        color: #555;
+        line-height: 1.8;
+        margin: 20px 0;
+        padding: 20px 30px;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     </style>
     <title>কাচ্চি গঞ্জ</title>
   </head>
@@ -122,10 +155,10 @@
 
 
   <section class="dishes">
-      <h1><p class="section-subtitle">
+      <p class="section-subtitle">
         কাচ্চিগঞ্জে প্রতিটি পদই তৈরি হয় খাঁটি উপকরণ এবং পরিপূর্ণ স্বাদের সাথে। 
-        আমাদের বিশেষ ডিশগুলো আপনাকে এনে দেবে এক অসাধারণ রন্ধন অভিজ্ঞতা।   
-      </p></h1>
+        আমাদের বিশেষ ডিশগুলো আপনাকে এনে দেবে এক অসাধারণ রন্ধন অভিজ্ঞতা।
+      </p>
         <?php
            if(isset($message12)){
              foreach ($message12 as $message12){
@@ -162,7 +195,7 @@
                    <input type="hidden" name="product_quantity" value="1" min="1">
                    <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
                   <button type="submit" name="add_to_cart" class="add-cart-btn">
-                    <i class="bi bi-cart-fill"></i>
+                    <i class="bi bi-cart-fill"></i> 
                   </button>
         </form>          
         </div>
@@ -171,7 +204,7 @@
               }
               else
                 {
-                  echo '<p class="empty">no products added yet!</p>';
+                  echo '<p class="empty">No Products Added Yet!</p>';
               }
          ?>
       </div>

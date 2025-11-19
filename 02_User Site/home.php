@@ -39,19 +39,20 @@
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>"> 
     <style>
       .add-to-cart-form {
-    text-align: center;
-    margin-top: 10px;
+        text-align: center;
+        margin-top: 10px;
 }
 
 .add-cart-btn {
-    background: #d4af37;
-    color: #fff;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 20px;
-    transition: 0.3s;
+        /* ensure consistent gold gradient and prevent white override */
+        background: linear-gradient(135deg, #d4af37 0%, #b68c25 100%) !important;
+        color: #fff !important;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
 }
 
 .add-cart-btn:hover {
@@ -152,10 +153,16 @@
                $select_products = mysqli_query($conn,"SELECT * FROM `products` ORDER BY id DESC") or die('query failed');
                if(mysqli_num_rows($select_products)>0)
                 {
+                  $cnt = 0;
                   while($fetch_products=mysqli_fetch_assoc($select_products))
                     {
+                      $cnt++;
+                      if($cnt > 3) {
+                          break;
+                      }
         ?>
-        <div class="dish-card">
+        <a href="menu.php">
+           <div class="dish-card">
           <div class="dish-img">
             <img src="../01_Admin Site/image/<?php echo $fetch_products['image'];?>" alt="<?php echo $fetch_products['id'];?>" />
             <span class="price"><?php echo $fetch_products['price']."/-";?></span>
@@ -164,7 +171,7 @@
           <p class="dish-desc">
            <?php echo $fetch_products['product_details'];?>
           </p>
-           <form action="" method="post" class="add-to-cart-form">
+           <!-- <form action="" method="post" class="add-to-cart-form">
                   <input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
                    <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
                    <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
@@ -173,7 +180,7 @@
                   <button type="submit" name="add_to_cart" class="add-cart-btn">
                     <i class="bi bi-cart-fill"></i>
                   </button>
-        </form>          
+        </form>           -->
         </div>
          <?php
            }
@@ -183,6 +190,8 @@
                   echo '<p class="empty">no products added yet!</p>';
               }
          ?>
+        </a>
+       
       </div>
       
     
