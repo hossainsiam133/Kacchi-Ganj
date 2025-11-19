@@ -178,6 +178,30 @@
     font-weight: 700;
 }
 
+/* Delete Item Button */
+.btn-delete-item {
+    display: inline-block;
+    background: #e74c3c;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.btn-delete-item:hover {
+    background: #c0392b;
+}
+
+.btn-delete-item i {
+    margin-right: 4px;
+}
+
     </style>
   </head>
   <body>
@@ -221,6 +245,11 @@
                         <input type="submit" name="update_qty_btn" value="update">
                     </div>
             </form>
+            <div style="margin-top: 8px; text-align: center;">
+                <a href="cart.php?delete=<?php echo $fetch_products['id']; ?>" class="btn-delete-item" onclick="return confirm('Remove this item from cart?')">
+                    <i class="ri-delete-bin-line"></i> Remove
+                </a>
+            </div>
              <div class="total-amt">
                        Total Amount : <span><?php echo $total_amt=($fetch_products['price']*$fetch_products['quantity']); ?></span>
               </div>
@@ -231,7 +260,7 @@
               }
               else
                 {
-                  echo '<p class="empty">no products added yet!</p>';
+                  echo '<p class="empty">No Products Added Yet!</p>';
               }
          ?>
       </div>
