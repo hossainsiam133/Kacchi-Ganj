@@ -101,7 +101,7 @@ input[type=submit]{
 }
 /*       form container      */
 .form-container{
-    background: var(--orange);
+    background: url('../02_User Site/assets/header-bg.png') center/cover no-repeat;
     width: 100%;
     min-height: 100vh;
     padding: 4rem 0;

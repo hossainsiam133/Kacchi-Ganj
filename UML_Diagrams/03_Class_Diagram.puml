@@ -1,0 +1,70 @@
+@startuml Class
+!theme plain
+title Kacchi-Ganj - Classes
+
+skinparam backgroundColor #FEFEFE
+skinparam class backgroundColor #D4AF37
+
+class User {
+    id: int
+    name: varchar
+    email: varchar
+    password: varchar
+    user_type: enum
+    --
+    login()
+    register()
+    getOrders()
+}
+
+class Product {
+    id: int
+    name: varchar
+    price: decimal
+    image: varchar
+    details: text
+    --
+    getDetails()
+    updatePrice()
+}
+
+class Cart {
+    id: int
+    user_id: int
+    product_id: int
+    quantity: int
+    price: decimal
+    --
+    addItem()
+    removeItem()
+    getTotal()
+}
+
+class Order {
+    id: int
+    user_id: int
+    total: decimal
+    address: text
+    placed_on: date
+    status: varchar
+    --
+    place()
+    updateStatus()
+}
+
+class Message {
+    id: int
+    sender_id: int
+    receiver_id: int
+    message: text
+    timestamp: datetime
+    --
+    send()
+    read()
+}
+
+User "1" --> "*" Cart
+User "1" --> "*" Order
+User "1" --> "*" Message
+Product "1" --> "*" Cart
+@enduml

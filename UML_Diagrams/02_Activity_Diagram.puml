@@ -1,0 +1,34 @@
+@startuml Activity
+!theme plain
+title Kacchi-Ganj - Order Flow
+
+skinparam backgroundColor #FEFEFE
+skinparam activity backgroundColor #D4AF37
+
+start
+:User Login;
+:Browse Products;
+:Add to Cart;
+:View Cart;
+
+if (Cart Empty?) then (Yes)
+    :Show Empty;
+    backward :Browse Products;
+else (No)
+endif
+
+:Checkout;
+:Enter Details;
+:Verify Password;
+
+if (Valid?) then (No)
+    :Error Message;
+    backward :Verify Password;
+else (Yes)
+endif
+
+:Place Order;
+:Generate Receipt;
+:Success;
+stop
+@enduml

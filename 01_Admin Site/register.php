@@ -14,6 +14,8 @@ if(isset($_POST['submit-btn'])){
     $filter_cpassword = htmlspecialchars($_POST['cpassword'], ENT_QUOTES, 'UTF-8');
     $cpassword = mysqli_real_escape_string($conn, $filter_cpassword);
 
+    $address = mysqli_real_escape_string($conn, $_POST['address'] ?? '');
+    $mobile = mysqli_real_escape_string($conn, $_POST['mobile'] ?? '');
     $select_user = mysqli_query($conn,"SELECT * FROM `users` WHERE email='$email'") or die('query failed');
     if(mysqli_num_rows($select_user) > 0){
         $message11[] = 'user already exists';
@@ -21,7 +23,7 @@ if(isset($_POST['submit-btn'])){
         if($password != $cpassword){
             $message11[] = 'passwords do not match';
         } else {
-            mysqli_query($conn, "INSERT INTO `users` (`name`,`email`,`password`) VALUES ('$name','$email','$password')") or die("query failed");
+            mysqli_query($conn, "INSERT INTO `users` (`name`,`email`,`password`,`address`,`mobile`) VALUES ('$name','$email','$password','$address','$mobile')") or die("query failed");
             $message11[] = 'registered successfully';
             header('Location: login.php');
             exit; // stop further output
@@ -54,14 +56,16 @@ if(isset($_POST['submit-btn'])){
         }
     }
      ?>
-        <form method="post">
-            <h1>register now</h1>
-            <input type="text" name="name" placeholder="Enter your name" required>
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <input type="password" name="password" placeholder="Enter your password" required>
-            <input type="password" name="cpassword" placeholder="Confirm your password" required>
-            <input type="submit" name="submit-btn" value="register now" class="btn">
-            <p>Already have an account ? <a href="login.php"><b>Login Now</b></a></p>
+        <form method="post" style="background:#fff3e0;border-radius:16px;box-shadow:0 6px 24px rgba(212,175,55,0.10);padding:32px;max-width:420px;margin:auto;">
+            <h1 style="color:#b68c25;margin-bottom:18px;">Register</h1>
+            <div style="margin-bottom:16px;"><input type="text" name="name" placeholder="Full Name" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <div style="margin-bottom:16px;"><input type="email" name="email" placeholder="Email" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <div style="margin-bottom:16px;"><input type="password" name="password" placeholder="Password" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <div style="margin-bottom:16px;"><input type="password" name="cpassword" placeholder="Confirm Password" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <div style="margin-bottom:16px;"><input type="text" name="address" placeholder="Address" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <div style="margin-bottom:16px;"><input type="tel" name="mobile" placeholder="Mobile No" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
+            <input type="submit" name="submit-btn" value="Register Now" class="btn" style="background:linear-gradient(135deg,#d4af37 0%,#b68c25 100%);color:#fff;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600;box-shadow:0 2px 12px rgba(212,175,55,0.10);transition:background 0.2s;">
+            <p style="margin-top:12px;">Already have an account? <a href="login.php"><b>Login Now</b></a></p>
         </form>
     </section>
 </body>

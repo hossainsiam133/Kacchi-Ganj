@@ -26,8 +26,10 @@
           <div>
             <ul class="footer__links">
               <li>
+                <a target="_blank" href="https://www.google.com/maps/place/Kacchi+Ganj/@23.5611143,90.5226509,1279m/data=!3m1!1e3!4m10!1m2!2m1!1z4KaV4Ka-4Kaa4KeN4Kaa4Ka_4KaX4Kae4KeN4KacLCDgprjgp4Hgppbgpqjgpr_gpqzgpr7gprgg4Ka44KaC4Kay4KaX4KeN4KaoLCDgprngpr7gpp_gprLgppXgp43gprfgp4Dgppfgpp7gp43gppwg4Kaw4KeL4KahLCDgpq7gp4Hgpqjgp43gprjgp4Dgppfgpp7gp43gppwg4Ka44Kam4KawLCDgpq7gp4Hgpqjgp43gprjgp4Dgppfgpp7gp43gppw!3m6!1s0x3755ad7d6093266b:0x2c618869d69fa9e!8m2!3d23.5611143!4d90.5316631!15sCsUB4KaV4Ka-4Kaa4KeN4Kaa4Ka_4KaX4Kae4KeN4KacLCDgprjgp4Hgppbgpqjgpr_gpqzgpr7gprgg4Ka44KaC4Kay4KaX4KeN4KaoLCDgprngpr7gpp_gprLgppXgp43gprfgp4Dgppfgpp7gp43gppwg4Kaw4KeL4KahLCDgpq7gp4Hgpqjgp43gprjgp4Dgppfgpp7gp43gppwg4Ka44Kam4KawLCDgpq7gp4Hgpqjgp43gprjgp4Dgppfgpp7gp43gppxaxAEiwQHgppXgpr7gpprgp43gpprgpr_gppfgpp7gp43gppwg4Ka44KeB4KaW4Kao4Ka_4Kas4Ka-4Ka4IOCmuOCmguCmsuCml-CnjeCmqCDgprngpr7gpp_gprLgppXgp43gprfgp4Dgppfgpp7gp43gppwg4Kaw4KeL4KahIOCmruCngeCmqOCnjeCmuOCngOCml-CmnuCnjeCmnCDgprjgpqbgprAg4Kau4KeB4Kao4KeN4Ka44KeA4KaX4Kae4KeN4KackgEKcmVzdGF1cmFudJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSWE9FbFRabkJuUlJBQuABAPoBBAgAEBE!16s%2Fg%2F11hnlz6ynr?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D">
                 <span><i class="ri-map-pin-2-fill"></i></span>
                 সুখনিবাস সংলগ্ন, হাটলক্ষীগঞ্জ রোড, মুন্সীগঞ্জ সদর, মুন্সীগঞ্জ
+                </a>
               </li>
               <li>
                 <span><i class="ri-mail-fill"></i></span>
