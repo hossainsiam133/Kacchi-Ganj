@@ -113,8 +113,8 @@ $html = '
                 <span class="value total-amount">৳' . htmlspecialchars($order['total_price']) . '</span>
             </div>
             <div class="row">
-                <span class="label">Status:</span>
-                <span class="value">Pending</span>
+                <span class="label">Payment Status:</span>
+                <span class="value">' . htmlspecialchars(ucfirst($order['payment_status'] ?? 'pending')) . '</span>
             </div>
         </div>
 

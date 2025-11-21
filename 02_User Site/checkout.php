@@ -42,10 +42,10 @@
       $user = mysqli_fetch_assoc($user_query);
       if($user['password'] === $password){
         // Password matches, place order
-        $insert_result = mysqli_query($conn, "INSERT INTO `order` (`user_id`,`name`,`number`,`email`,`method`,`address`,`total_products`,`total_price`,`placed_on`) VALUES('$user_id','$name','$number','$email','$method','$address','$total_products','$cart_total','$placed_on')") or die('query failed');
+  $insert_result = mysqli_query($conn, "INSERT INTO `order` (`user_id`,`name`,`number`,`email`,`method`,`address`,`total_products`,`total_price`,`placed_on`,`payment_status`) VALUES('$user_id','$name','$number','$email','$method','$address','$total_products','$cart_total','$placed_on','pending')") or die('query failed');
         $order_id = mysqli_insert_id($conn);
         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id='$user_id'") or die('query failed');
-        $order_message = '<div class="card" style="background:#e6ffe6;color:#2563eb;padding:12px;margin-bottom:16px;border-radius:8px;">Order placed successfully! Your receipt will download automatically.</div>';
+  $order_message = '<div class="card" style="background:#e6ffe6;color:#2563eb;padding:12px;margin-bottom:16px;border-radius:8px;">Order placed successfully! <br><br><a href="generate_receipt.php?order_id=' . $order_id . '" class="btn" download="Receipt_' . str_pad($order_id, 6, '0', STR_PAD_LEFT) . '.html">Download Receipt</a></div>';
         $order_placed_successfully = true;
         $_SESSION['receipt_order_id'] = $order_id;
       } else {
@@ -278,20 +278,27 @@ main.main-section {
         <h3 id="checkout" class="mt-12 reveal">Customer details</h3>
 
         <!-- Registration / checkout form. JS validation attaches to #registerForm -->
+        <?php
+        $profile = ['name'=>'','email'=>'','number'=>'','address'=>''];
+        $profile_query = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$user_id'");
+        if($profile_query && mysqli_num_rows($profile_query)>0){
+          $profile = mysqli_fetch_assoc($profile_query);
+        }
+        ?>
         <form id="registerForm"  method="POST" class="mt-12">
           <div class="row" style="flex-direction:column;">
             <label class="small" for="name">Full name</label>
-            <input class="input reveal" type="text" id="name" name="name" placeholder="Your full name" required>
+            <input class="input reveal" type="text" id="name" name="name" placeholder="Your full name" required value="<?php echo htmlspecialchars($profile['name'] ?? '', ENT_QUOTES); ?>">
           </div>
 
           <div class="row mt-8" style="flex-direction:column;">
             <label class="small" for="email">Email</label>
-            <input class="input reveal" type="email" id="email" name="email" placeholder="you@example.com" required>
+            <input class="input reveal" type="email" id="email" name="email" placeholder="you@example.com" required value="<?php echo htmlspecialchars($profile['email'] ?? '', ENT_QUOTES); ?>">
           </div>
 
           <div class="row mt-8" style="flex-direction:column;">
             <label class="small" for="mobile">Mobile</label>
-            <input class="input reveal" type="tel" id="mobile" name="number" placeholder="+8801XXXXXXXXX" required>
+            <input class="input reveal" type="tel" id="mobile" name="number" placeholder="+8801XXXXXXXXX" required value="<?php echo htmlspecialchars($profile['mobile'] ?? '', ENT_QUOTES); ?>">
           </div>
 
           <div class="row mt-8" style="flex-direction:column;">
@@ -302,17 +309,17 @@ main.main-section {
 
           <div class="row mt-8" style="flex-direction:column;">
             <label class="small" for="address">Address</label>
-            <input class="input reveal" type="text" id="address" name="address" placeholder="Your delivery address" required>
+            <input class="input reveal" type="text" id="address" name="address" placeholder="Your delivery address" required value="<?php echo htmlspecialchars($profile['address'] ?? '', ENT_QUOTES); ?>">
           </div>
 
           <div class="row mt-8" style="flex-direction:column;">
             <label class="small" for="payment">Payment Method</label>
             <select class="input reveal" id="payment" name="method" required>
               <option value="">Select payment method</option>
-              <option value="cash">Cash on Delivery</option>
-              <option value="card">Credit/Debit Card</option>
-              <option value="bkash">bKash</option>
-              <option value="nagad">Nagad</option>
+              <option value="cash" <?php if(($profile['method'] ?? '')=='cash') echo 'selected'; ?>>Cash on Delivery</option>
+              <!-- <option value="card" <?php if(($profile['method'] ?? '')=='card') echo 'selected'; ?>>Credit/Debit Card</option> -->
+              <option value="bkash" <?php if(($profile['method'] ?? '')=='bkash') echo 'selected'; ?>>bKash</option>
+              <option value="nagad" <?php if(($profile['method'] ?? '')=='nagad') echo 'selected'; ?>>Nagad</option>
             </select>
           </div>
 
@@ -366,6 +373,12 @@ main.main-section {
         <hr class="mt-8">
         <p style="font-weight:700;">Total: <?php echo $grand_total+$shipping?></p>
       </div>
+
+        <!-- Payment Method Image -->
+        <div class="card mt-12 reveal" style="text-align:center;">
+          <img src="assets/bkash.jpg" alt="bKash Payment" style="max-width:180px;border-radius:12px;box-shadow:0 2px 12px rgba(37,99,235,0.10);margin:0 auto;">
+          <div class="small text-muted mt-8">bKash, Nagad, Card & Cash accepted</div>
+        </div>
     </aside>
   </div>
 
@@ -465,23 +478,8 @@ main.main-section {
     });
   }
 
-  /* Auto-download receipt if order placed successfully */
-  function triggerReceiptDownload() {
-    <?php if(isset($order_placed_successfully) && $order_placed_successfully && isset($_SESSION['receipt_order_id'])): ?>
-      const orderId = <?php echo intval($_SESSION['receipt_order_id']); ?>;
-      // Trigger download after a small delay to allow user to see success message
-      setTimeout(function() {
-        const link = document.createElement('a');
-        link.href = 'generate_receipt.php?order_id=' + orderId;
-        link.download = 'Receipt_' + String(orderId).padStart(6, '0') + '.html';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        // Clear the session variable so it doesn't download again on refresh
-        fetch('clear_receipt_session.php');
-      }, 500);
-    <?php endif; ?>
-  }
+
+  // No auto-download for receipt. Manual download button will be shown after order placement.
 
   /* Init everything on DOMContentLoaded */
   document.addEventListener('DOMContentLoaded', function () {

@@ -1,0 +1,32 @@
+@startuml UseCase
+left to right direction
+!theme plain
+title Kacchi-Ganj - Use Cases
+
+skinparam backgroundColor #FEFEFE
+skinparam actor backgroundColor #FFE6CC
+skinparam usecase backgroundColor #D4AF37
+
+actor User as U
+actor Admin as A
+
+' Connections for User
+U --> (Register)
+U --> (Login)
+U --> (Browse Menu)
+U --> (Add to Cart)
+U --> (Place Order)
+U --> (Message Admin)
+
+' Connections for Admin
+A --> (Admin Login)
+A --> (Add Product)
+A --> (View Orders)
+A --> (Manage Users)
+A --> (Reply Messages)
+
+' Use Case Relationships
+(Browse Menu) .> (View Product Details) : includes
+(Add to Cart) .> (Browse Menu) : extends
+(Place Order) .> (Add to Cart) : extends
+@enduml
