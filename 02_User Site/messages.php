@@ -1,15 +1,14 @@
 <?php
     include 'connection.php';
+    include 'auth_helper.php';
     // Load global config (DEFAULT_ADMIN_ID)
     if (file_exists(__DIR__ . '/../config.php')) {
         include __DIR__ . '/../config.php';
     }
     session_start();
-    $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
-
-    if(!$user_id){
-       header('location: ../01_Admin Site/login.php');
-    }
+    
+    require_user_login();
+    $user_id = get_user_id();
     
     // Get current user info
     $user_query = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$user_id'");
