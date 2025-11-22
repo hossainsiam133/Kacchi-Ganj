@@ -3,6 +3,11 @@
 // This creates a downloadable PDF receipt for the order
 
 require_once 'connection.php';
+require_once 'auth_helper.php';
+
+session_start();
+require_user_login();
+$user_id = get_user_id();
 
 if(!isset($_GET['order_id'])){
     die('Order ID not provided');
@@ -17,6 +22,12 @@ if(mysqli_num_rows($order_query) === 0){
 }
 
 $order = mysqli_fetch_assoc($order_query);
+
+// Security: Verify the order belongs to the logged-in user
+if($order['user_id'] != $user_id) {
+    die('Unauthorized: This order does not belong to you');
+}
+
 $user_query = mysqli_query($conn, "SELECT * FROM `users` WHERE id='".$order['user_id']."'") or die('query failed');
 $user = mysqli_fetch_assoc($user_query);
 

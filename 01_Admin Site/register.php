@@ -1,5 +1,6 @@
 <?php 
 include 'connection.php';
+session_start();
 
 if(isset($_POST['submit-btn'])){
     $filter_name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -25,8 +26,19 @@ if(isset($_POST['submit-btn'])){
         } else {
             mysqli_query($conn, "INSERT INTO `users` (`name`,`email`,`password`,`address`,`mobile`) VALUES ('$name','$email','$password','$address','$mobile')") or die("query failed");
             $message11[] = 'registered successfully';
-            header('Location: login.php');
-            exit; // stop further output
+            
+            // After registration, proceed to login with return_url
+            $return_url = '';
+            if(!empty($_GET['return_url'])){
+                $r = urldecode($_GET['return_url']);
+                // basic safety: only allow internal redirects
+                if(strpos($r, '..') === false){
+                    $return_url = '?return_url=' . urlencode($r);
+                }
+            }
+            
+            header('Location: login.php' . $return_url);
+            exit;
         }
     }
 }
@@ -65,7 +77,7 @@ if(isset($_POST['submit-btn'])){
             <div style="margin-bottom:16px;"><input type="text" name="address" placeholder="Address" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
             <div style="margin-bottom:16px;"><input type="tel" name="mobile" placeholder="Mobile No" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;font-size:1rem;background:#fff;"></div>
             <input type="submit" name="submit-btn" value="Register Now" class="btn" style="background:linear-gradient(135deg,#d4af37 0%,#b68c25 100%);color:#fff;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600;box-shadow:0 2px 12px rgba(212,175,55,0.10);transition:background 0.2s;">
-            <p style="margin-top:12px;">Already have an account? <a href="login.php"><b>Login Now</b></a></p>
+            <p style="margin-top:12px;">Already have an account? <a href="login.php<?php echo isset($_GET['return_url']) ? '?return_url=' . urlencode($_GET['return_url']) : ''; ?>"><b>Login Now</b></a></p>
         </form>
     </section>
 </body>

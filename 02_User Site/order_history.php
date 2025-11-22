@@ -1,11 +1,10 @@
 <?php
 include 'connection.php';
+include 'auth_helper.php';
 session_start();
-$user_id = $_SESSION['user_id'];
-if (!isset($user_id)) {
-    header('location: ../01_Admin Site/login.php');
-    exit;
-}
+
+require_user_login();
+$user_id = get_user_id();
 ?>
 <!DOCTYPE html>
 <html lang="en">
